@@ -1,15 +1,12 @@
-const express=require("express")
-
-const {body, validationResult}=require("express-validator")
-
-const Post=require("../models/post.models")
-
+const express=require("express");
+const {body, validationResult}=require("express-validator");
+const Post=require("../models/post.models");
 const router=express.Router();
 
 
 router.get("", async(req,res)=>{
             try{
-                const posts= await Post.find().populate({path:"user_id", select:{name:1,email:1,_id:0}}).lean().exec();
+                const posts= await Post.find().populate({path:"user_id"}).lean().exec();
                                      return res.status(200).send({posts})
                 }
                 catch(err){
