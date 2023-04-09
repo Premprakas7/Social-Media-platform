@@ -1,5 +1,12 @@
-const express=require("express")
+const express=require("express");
 
-const app=express()
+const usersController=require("./controllers/user.controllers");
+const postsController=require("./controllers/post.controllers");
+const app=express();
 
-module.exports=app
+app.use(express.json())
+
+app.use("/users",usersController);
+app.use("/posts", postsController);
+
+module.exports=app;
