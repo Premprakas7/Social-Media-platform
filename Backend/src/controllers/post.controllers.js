@@ -6,12 +6,12 @@ const router=express.Router();
 
 router.get("", async(req,res)=>{
             try{
-                const posts= await Post.find().populate({path:"user_id"}).lean().exec();
-                                     return res.status(200).send({posts})
+                const posts= await Post.find().populate({path:"user_id", select:{"name":1, }}).lean().exec();
+                return res.status(200).send({posts})
                 }
                 catch(err){
-                    return res.status(500).send({err})
-                    }
+                return res.status(500).send({err})
+                }
 })
 
 router.post("",
